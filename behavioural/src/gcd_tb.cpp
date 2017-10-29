@@ -29,11 +29,35 @@ void gcd_testbench::do_testbench(){
   wait(1);
   cout << "@" << sc_time_stamp() << " Set the Valid signal to 1" << endl;
   valid.write(1);
+  wait(1);
+  cout << "@" << sc_time_stamp() << " Set the Valid signal to 0" << endl;
+  valid.write(0);
+  wait(1);
   cout << "@" << sc_time_stamp() << " Wait a few clock cycles to see the result" << endl;
   while(ready.read() != 1){
-    wait();
+    cout << "@" << sc_time_stamp() << " Ready not set. Wait for 1 clock cycle" << endl;
+    wait(1);
   }
   cout << "@" << sc_time_stamp() << " Ready signal is set. GCD is " << GCD << endl;
+  wait(5);
+
+  cout << "@" << sc_time_stamp() << " Set the input A to 50 and the input B to 70" << endl;
+  A.write(50);
+  B.write(70);
+  wait(1);
+  cout << "@" << sc_time_stamp() << " Set the Valid signal to 1" << endl;
+  valid.write(1);
+  wait(1);
+  cout << "@" << sc_time_stamp() << " Set the Valid signal to 0" << endl;
+  valid.write(0);
+  wait(1);
+  cout << "@" << sc_time_stamp() << " Wait a few clock cycles to see the result" << endl;
+  while(ready.read() != 1){
+    cout << "@" << sc_time_stamp() << " Ready not set. Wait for 1 clock cycle" << endl;
+    wait(1);
+  }
+  cout << "@" << sc_time_stamp() << " Ready signal is set. GCD is " << GCD << endl;
+  wait(5);
 
   sc_stop();
 }
